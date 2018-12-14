@@ -1,0 +1,36 @@
+version: '2'  
+services:  
+  mynginx:
+    image: nginx:latest
+    container_name: ng1
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/src
+      - ./src/static:/src/static
+      - ./conf.d:/etc/nginx/conf.d
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: web_mycker
+    depends_on:
+      - db
+    volumes:
+      - ./src:/src
+    expose:
+      - "8000"
+  db:
+    image: postgres:latest
+    container_name: db_mycker
+    environment:
+      POSTGRES_DB: test_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: a
+    ports:
+        - "5432:5432" 
+    volumes:
+        - mychecker_database_volume:/var/lib/mysql        
+
+volumes:
+  mychecker_database_volume:
