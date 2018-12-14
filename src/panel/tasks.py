@@ -7,5 +7,3 @@ import os, re, smtplib, json
 def every_mins():
     print('Every  minute check all severs')
     checkservers()
-    webhook_url = 'https://hooks.slack.com/services/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'
-    slack_data = {'text': 'il cron gira'}
