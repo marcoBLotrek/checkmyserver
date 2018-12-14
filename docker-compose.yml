@@ -16,6 +16,7 @@ services:
     container_name: web_mycker
     depends_on:
       - db
+      - redis
     volumes:
       - ./src:/src
     expose:
@@ -31,6 +32,10 @@ services:
         - "5432:5432" 
     volumes:
         - mychecker_database_volume:/var/lib/mysql        
-
+  redis:
+    restart: always
+    image: redis:latest
+    expose:
+      - "6379"
 volumes:
   mychecker_database_volume:

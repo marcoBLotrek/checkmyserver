@@ -133,3 +133,37 @@ USE_TZ = True
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
+
+HUEY = {
+   'name': 'jointlytaskrunner',  # The huey name.
+   'result_store': True,  # Store return values of tasks.
+   'events': True,  # Consumer emits events allowing real-time monitoring.
+   'store_none': False,  # If a task returns None, do not save to results.
+   'always_eager': False,  # If DEBUG=True, run synchronously.
+   'store_errors': True,  # Store error info if task throws exception.
+   'blocking': False,  # Poll the queue rather than do blocking pop.
+   'connection': {
+       'host': 'redis',
+       'port': 6379,
+       'db': 0,
+       'connection_pool': None,  # Definitely you should use pooling!
+       # ... tons of other options, see redis-py for details.
+
+       # huey-specific connection parameters.
+       'read_timeout': 1,  # If not polling (blocking pop), use timeout.
+       'max_errors': 1000,  # Only store the 1000 most recent errors.
+       'url': None,  # Allow Redis config via a DSN.
+   },
+   'consumer': {
+       'workers': 2,
+       'worker_type': 'thread',
+       'initial_delay': 0.1,  # Smallest polling interval, same as -d.
+       'backoff': 1.15,  # Exponential backoff using this rate, -b.
+       'max_delay': 10.0,  # Max possible polling interval, -m.
+       'utc': True,  # Treat ETAs and schedules as UTC datetimes.
+       'scheduler_interval': 1,  # Check schedule every second, -s.
+       'periodic': True,  # Enable crontab feature.
+       'check_worker_health': True,  # Enable worker health checks.
+       'health_check_interval': 1,  # Check worker health every second.
+   },
+}
