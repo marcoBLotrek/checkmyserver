@@ -1,0 +1,4 @@
+django
+twilio==5.7.0
+huey==1.9.1
+redis

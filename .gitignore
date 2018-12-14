@@ -1,0 +1,12 @@
+src/.DS_Store
+venv
+*.log
+*.db
+*.pyc
+*.zip
+*.sqlite3
+*.rdb
+
+local_settings.py
+
+panel/local_settings.py
