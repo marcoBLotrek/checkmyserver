@@ -3,6 +3,7 @@ services:
   mynginx:
     image: nginx:latest
     container_name: ng1
+    env_file: variable.env
     ports:
       - "80:80"
     volumes:
@@ -14,6 +15,7 @@ services:
   web:
     build: .
     container_name: web_mycker
+    env_file: variable.env
     depends_on:
       - db
       - redis
