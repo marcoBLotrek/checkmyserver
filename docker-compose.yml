@@ -20,7 +20,7 @@ services:
     volumes:
       - ./src:/src
     expose:
-      - "8000"
+      - "9000"
   db:
     image: postgres:latest
     container_name: db_mycker
