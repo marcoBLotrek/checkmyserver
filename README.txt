@@ -10,3 +10,19 @@ TWILLIO_SID ='your TWILLIO SID'
 TWILLUIO_AUTHTOKEN = 'your TWILLUIO AUTHTOKEN'
 
 
+
+To start :
+set your hosts to 127.0.0.1 example.org
+docker-compose up --build
+
+it create an superuser 
+
+user:admin
+pass:adminpass
+
+go to 
+http://example.org/admin/
+
+
+
+

@@ -7,8 +7,4 @@ WORKDIR /src
 ADD ./src /src
 ADD ./requirements.txt /src/requirements.txt
 RUN pip install -r requirements.txt
-CMD python manage.py collectstatic --no-input
-CMD python manage.py migrate
-CMD python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'adminpass')"
-CMD gunicorn mychecker.wsgi -b 0.0.0.0:8000 
-CMD python manage.py run_huey 
+CMD python manage.py collectstatic --no-input && python manage.py migrate && python manage.py shell -c "from django.contrib.auth.models import User; User.objects.create_superuser('admin', 'admin@example.com', 'adminpass')" && gunicorn mychecker.wsgi -b 0.0.0.0:9000  && python manage.py run_huey 
